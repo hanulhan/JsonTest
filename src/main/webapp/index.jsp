@@ -4,30 +4,14 @@
 
 <html>
     <script>
-        function NavigateRestWeatherBahamas() {
+        function NavigateRestPerson() {
 
             var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
-            var s = window.location.origin + ctx + "/rest/weather/AEXX0004";
+            var s = window.location.origin + ctx + "/rest/person";
             window.open(s);
 
         }
 
-        function NavigateRestWeatherCologne() {
-
-            var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
-            var s = window.location.origin + ctx + "/rest/weather/GMXX0018";
-            window.open(s);
-
-        }
-
-
-        function NavigateRestWeatherlocations() {
-
-            var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
-            var s = window.location.origin + ctx + "/rest/weatherlocations";
-            window.open(s);
-
-        }   // CopyToClipboard()
     </script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,13 +22,8 @@
         <div id="inputPanel">
             <br>
             <br>   
-            <a id="myLink" title="navigate" href="javascript:void(0)" onclick="NavigateRestWeatherCologne();return false;">Rest call for weather Cologne</a>
+            <a id="myLink" title="navigate" href="javascript:void(0)" onclick="NavigateRestPerson();return false;">Rest call for person</a>
             <br>   
-            <a id="myLink" title="navigate" href="javascript:void(0)" onclick="NavigateRestWeatherBahamas();return false;">Rest call for weather Bahamas</a>
-            <br>   
-            <a id="myLink" title="navigate" href="javascript:void(0)" onclick="NavigateRestWeatherlocations();
-                    return false;">Rest call for weather locations</a>
-            <br>
 
 
 
