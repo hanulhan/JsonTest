@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- datasourceWeather from weather-rest -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+      http://www.springframework.org/schema/context 
+      http://www.springframework.org/schema/context/spring-context-4.0.xsd
+      http://www.springframework.org/schema/tx 
+      http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!-- MySQL DataSource -->
+    <bean id="datasourceWeather" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.AESWeather.driverClassName}" />
+        <property name="jdbcUrl" value="${jdbc.AESWeather.url}" />
+        <property name="user" value="${jdbc.AESWeather.username}" />
+        <property name="password" value="${jdbc.AESWeather.password}" />
+        <property name="minPoolSize" value="${jdbc.AESWeather.minPoolSize}" />
+        <property name="maxPoolSize" value="${jdbc.AESWeather.maxPoolSize}" />
+        <property name="initialPoolSize" value="${jdbc.AESWeather.initialPoolSize}" />
+        <property name="idleConnectionTestPeriod" value="${jdbc.AESWeather.idletest}"/>
+    </bean>
+   
+    <!-- JPA Entity Manager -->    
+    <bean id="entityManagerFactoryWeather"  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="datasourceWeather" />
+        <property name="persistenceUnitName" value="PersistenceWeather" />        
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="MYSQL" />
+                <property name="showSql" value="${hibernate.show_sql}" />
+                <property name="generateDdl" value="false" />
+            </bean>
+        </property>
+    </bean>       
+
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+         
+    <!-- Transaction Management -->
+    <bean id="transactionManagerWeather" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactoryWeather" />
+    </bean>
+	
+    <tx:annotation-driven/>
+        
+        
+    <bean name="lazyConnectionDataSourceProxyWeather" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+        <property name="targetDataSource" ref="datasourceWeather" />
+        <qualifier value="transactionManagerWeather"/>
+    </bean>
+    
+</beans>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/s/channel.xsd" uri="src/main/resources/jaxb/Weather/channel.xsd"/>
+    <system systemId="file:/C:/s/forecast.xsd" uri="src/main/resources/jaxb/Weather/forecast.xsd"/>
+    <system systemId="file:/C:/s/weatherlocations.xsd" uri="src/main/resources/jaxb/Weather/weatherlocations.xsd"/>
+</catalog>

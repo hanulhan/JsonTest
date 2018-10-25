@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.acentic.cloudservices</groupId>
+        <artifactId>CloudServices-master</artifactId>
+        <version>1.5.0</version>
+    </parent>    
+
+    <artifactId>jsonTest</artifactId>
+    <name>Cloudservices :: jsonTest</name>
+    <packaging>war</packaging>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        
+    </properties>
+
+    <dependencies>
+
+        <!-- =================================== -->
+        <!-- Internal CloudServices Dependencies -->
+        <!-- =================================== -->
+        
+        <!-- =================================== -->
+        <!--        External Dependencies        -->
+        <!-- =================================== -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.xbean</groupId>
+            <artifactId>xbean-spring</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-multipart</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>                
+        </dependency>        
+
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+<!--                    <overlays>
+                        <overlay>
+                            <groupId>com.acentic.cloudservices</groupId>
+                            <artifactId>webutil</artifactId>
+                            <excludes>
+                                <exclude>/fonts/**</exclude>
+                                <exclude>/images/**</exclude>
+                                <exclude>/js/**</exclude>
+                                <exclude>/lib/**</exclude>
+                                <exclude>/css/**</exclude>
+                            </excludes>
+                        </overlay>
+                    </overlays>-->
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <filtering>true</filtering>
+                            <targetPath>WEB-INF</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>${version.javaee-api}</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaIncludes>
+                                <include>jaxb/Weather/*.xsd</include>
+                            </schemaIncludes>
+                            <episodeFile>${project.build.directory}/generated-sources/xjc/META-INF/jaxb-Weather.episode</episodeFile>
+                            <generatePackage>com.acentic.cloudservices.weather.rest</generatePackage>
+                        </configuration>
+                        <id>jaxb-generate-Weather</id>
+                    </execution>
+                </executions>
+                <configuration>
+                    <catalog>src/main/resources/jaxb/catalog.xml</catalog>
+                    <catalogResolver>org.jvnet.jaxb2.maven2.resolver.tools.ClasspathCatalogResolver</catalogResolver>
+                    <forceRegenerate>true</forceRegenerate>
+                    <generateDirectory>${project.build.directory}/generated-sources/xjc</generateDirectory>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>s3_rep_internal</id>
+            <url>s3://acentic-maven-repository/releases</url>
+        </repository>
+        <repository>
+            <id>s3_rep_snapshot</id>
+            <url>s3://acentic-maven-repository/snapshots</url>
+        </repository>
+    </repositories>
+
+</project>

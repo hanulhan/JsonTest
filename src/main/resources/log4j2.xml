@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c.%M:%L - %m%n"/>
+         </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.acentic.cloudservices.statistics" level="DEBUG"/>
+        <Logger name="com.acentic.cloudservices.weather" level="${log4j.com.acentic.cloudservices.weather}"/>
+        <Logger name="com.mchange" level="${log4j.com.mchange}"/>
+        <Logger name="org.springframework" level="${log4j.org.springframework}"/>
+        <Logger name="org.hibernate" level="WARN"/>
+        <Logger name="org.apache.struts2" level="${log4j.org.apache.struts2}"/>
+        <Logger name="org.apache.struts2.config" level="${log4j.org.apache.struts2.config}"/>
+
+        <Root level="${log4j.root}">
+            <AppenderRef  ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
