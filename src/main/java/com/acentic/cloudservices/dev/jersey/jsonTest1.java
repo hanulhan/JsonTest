@@ -56,7 +56,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author uhansen
  */
-@Path("/rest/person")
+@Path("/person")
 @Component
 public class jsonTest1 implements ApplicationContextAware {
 
@@ -82,6 +82,7 @@ public class jsonTest1 implements ApplicationContextAware {
      * @return an instance of java.lang.String
      */
     @POST
+    @Path("add")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
     public Response addPerson(List<Person> persons) {
@@ -126,6 +127,7 @@ public class jsonTest1 implements ApplicationContextAware {
 
     
     @GET
+    @Path("get")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addPerson() {
     //public Response addPerson() {

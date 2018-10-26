@@ -7,7 +7,7 @@
         function NavigateRestPerson() {
 
             var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
-            var s = window.location.origin + ctx + "/rest/person";
+            var s = window.location.origin + ctx + "/rest/person/get";
             window.open(s);
 
         }

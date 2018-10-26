@@ -26,5 +26,12 @@
     #                   applicationContext of weather-rest
     #########################################################################-->
     
+    
+    	<!-- to activate annotations in beans already registered in the ApplicationContext -->
+	<context:annotation-config />
+
+	<!-- scans packages to find and register beans within the application context -->
+	<context:component-scan base-package="com.jersey.series.spring.integration" />
+    
     <bean id="PersonRestService" class="com.acentic.cloudservices.dev.jersey.jsonTest1" />
 </beans>
