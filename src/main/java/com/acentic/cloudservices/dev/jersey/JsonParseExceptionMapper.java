@@ -5,6 +5,7 @@
  */
 package com.acentic.cloudservices.dev.jersey;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -15,26 +16,25 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
-import org.codehaus.jettison.json.JSONException;
 
 
 /**
  *
  * @author uli
  */
-public class UnexpectedExceptionMapper implements ExceptionMapper<JSONException> {
+public class JsonParseExceptionMapper implements ExceptionMapper<JsonParseException> {
 
     private static final transient ObjectMapper MAPPER = new ObjectMapper();
 
     @Override
-    public Response toResponse(final JSONException exception) {
+    public Response toResponse(JsonParseException exception) {
         ResponseBuilder builder = null;
         try {
             builder = Response.status(Status.BAD_REQUEST)
                     .entity(defaultJSON(exception))
                     .type(MediaType.APPLICATION_JSON);
         } catch (IOException ex) {
-            Logger.getLogger(UnexpectedExceptionMapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonParseExceptionMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return builder.build();
     }
@@ -47,5 +47,6 @@ public class UnexpectedExceptionMapper implements ExceptionMapper<JSONException>
             return "{\"message\":\"An internal error occurred\"}";
         }
     }
+
 
 }
