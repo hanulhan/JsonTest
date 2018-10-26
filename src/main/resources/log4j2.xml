@@ -7,15 +7,12 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.acentic.cloudservices.statistics" level="DEBUG"/>
-        <Logger name="com.acentic.cloudservices.weather" level="${log4j.com.acentic.cloudservices.weather}"/>
-        <Logger name="com.mchange" level="${log4j.com.mchange}"/>
-        <Logger name="org.springframework" level="${log4j.org.springframework}"/>
-        <Logger name="org.hibernate" level="WARN"/>
-        <Logger name="org.apache.struts2" level="${log4j.org.apache.struts2}"/>
-        <Logger name="org.apache.struts2.config" level="${log4j.org.apache.struts2.config}"/>
-
-        <Root level="${log4j.root}">
+        <Logger name="org.springframework" level="INFO"/>
+        <Logger name="com.sun.jersey" level="TRACE"/>
+        <Logger name="com.acentic.cloudservices.dev.jersey" level="DEBUG"/>
+        
+        
+        <Root level="INFO">
             <AppenderRef  ref="Console" />
         </Root>
     </Loggers>

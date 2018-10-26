@@ -92,6 +92,8 @@ public class jsonTest1 implements ApplicationContextAware {
         JSONObject json;
         JSONArray array = new JSONArray();
 
+        LOGGER.log(Level.DEBUG, "HTTP-POST addPerson()");
+        
         for (Person temp : persons) {
             LOGGER.debug("Add new person: " + temp.getNachname() + ", " + temp.getVorname());
             json = new JSONObject();
@@ -132,7 +134,7 @@ public class jsonTest1 implements ApplicationContextAware {
 
         JSONObject json;
         JSONArray array = new JSONArray();
-        
+        LOGGER.log(Level.DEBUG, "HTTP-Get addPerson()");
         
         Adresse myAddr;
         Person myPerson;
