@@ -44,7 +44,7 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>com.acentic.cloudservices.dev.jersey</param-value>
         </init-param>
-        <!--        <init-param>
+<!--        <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
             <param-value>
                 com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider
